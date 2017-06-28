@@ -1,5 +1,5 @@
-apiVersion: apps/v1beta1
-kind: StatefulSet
+apiVersion: apps/v1alpha1
+kind: PetSet
 metadata:
   name: redis
   annotations:
@@ -11,6 +11,8 @@ spec:
     metadata:
       labels:
         name: redis-node
+      annotations:
+        pod.alpha.kubernetes.io/initialized: "true"
     spec:
       terminationGracePeriodSeconds: 10
       containers:
@@ -93,4 +95,4 @@ spec:
         accessModes: [ "ReadWriteOnce" ]
         resources:
           requests:
-            storage: 3Gi
+            storage: 2Gi
