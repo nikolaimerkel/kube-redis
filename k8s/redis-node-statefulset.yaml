@@ -89,11 +89,8 @@ spec:
   volumeClaimTemplates:
     - metadata:
         name: data
-        annotations:
-          volume.beta.kubernetes.io/storage-class: "ssd"
-          gcp-auto-backup: "yes"
       spec:
         accessModes: [ "ReadWriteOnce" ]
         resources:
           requests:
-            storage: 20Gi
+            storage: 3Gi
