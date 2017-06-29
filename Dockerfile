@@ -7,8 +7,7 @@ RUN ls -la /usr/local/bin/kubectl
 RUN chgrp -R 42 /usr/local/bin/kubectl \
   && chown -R 42 /usr/local/bin/kubectl \
   && chmod -R g+rwX /usr/local/bin/kubectl
-RUN ls -la /usr/local/bin/kubectl
-
+  
 WORKDIR /app
 ADD . /app
 run ls -la /app
