@@ -44,7 +44,7 @@ spec:
         # Sentinel
         - name: redis-sentinel
           image: redis:3.2
-          command: [ "bash", "-c", "touch sentinel.conf && redis-sentinel sentinel.conf" ]
+          command: [ "bash", "-c", "whoami && touch sentinel.conf && redis-sentinel sentinel.conf" ]
           ports:
             - name: sentinel
               containerPort: 26379
