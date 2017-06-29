@@ -11,4 +11,6 @@ WORKDIR /app
 ADD . /app
 RUN chmod +x /app/sidecar.sh
 RUN ls -la /app/sidecar.sh
+
+USER redis
 CMD /app/sidecar.sh
