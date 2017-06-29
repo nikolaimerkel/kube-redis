@@ -1,5 +1,5 @@
-FROM redis:3.2
-MAINTAINER Jason Waldrip <jwaldrip@commercialtribe.com>
+FROM centos/redis
+MAINTAINER Merkel
 
 ADD https://storage.googleapis.com/kubernetes-release/release/v1.6.0/bin/linux/amd64/kubectl /usr/local/bin/kubectl
 

@@ -18,7 +18,7 @@ spec:
       containers:
         # Redis
         - name: redis-node
-          image: redis:3.2
+          image: centos/redis
           command:
             - redis-server
           args:
@@ -43,8 +43,8 @@ spec:
 
         # Sentinel
         - name: redis-sentinel
-          image: redis:3.2
-          command: [ "bash", "-c", "whoami && touch sentinel.conf && redis-sentinel sentinel.conf" ]
+          image: centos/redis
+          command: [ "bash", "-c", "whoami && groups && ls -l && touch sentinel.conf && redis-sentinel sentinel.conf" ]
           ports:
             - name: sentinel
               containerPort: 26379
@@ -95,4 +95,4 @@ spec:
         accessModes: [ "ReadWriteOnce" ]
         resources:
           requests:
-            storage: 2Gi
+            storage: 20Gi
