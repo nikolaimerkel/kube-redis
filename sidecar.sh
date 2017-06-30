@@ -19,7 +19,7 @@ parallel_syncs=${PARALEL_SYNCS-1}
 
 # Get all the kubernetes pods via downardapi
 labels=`echo $(cat /etc/pod-info/labels) | tr -d '"' | tr " " ","`
-
+echo $labels
 try_step_interval=${TRY_STEP_INTERVAL-"1"}
 max_tries=${MAX_TRIES-"3"}
 retry() {
