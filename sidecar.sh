@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
+
+#  Exit immediately if a command exits with a non-zero status
 set -e
+# Print commands and their arguments as they are executed
 [[ $DEBUG == "true" ]] && set -x
 
 # Set vars
@@ -14,7 +17,7 @@ down_after_milliseconds=${DOWN_AFTER_MILLESECONDS-1000}
 failover_timeout=${FAILOVER_TIMEOUT-$(($down_after_milliseconds * 10))}
 parallel_syncs=${PARALEL_SYNCS-1}
 
-# Get all the kubernetes pods
+# Get all the kubernetes pods via downardapi
 labels=`echo $(cat /etc/pod-info/labels) | tr -d '"' | tr " " ","`
 
 try_step_interval=${TRY_STEP_INTERVAL-"1"}
@@ -85,7 +88,9 @@ active-master(){
 }
 
 hosts(){
+  echo "DEBUG: kubectl get pods"
   echo ""
+  # return Ips of all pods in namespace
   kubectl get pods -l=$labels \
     --template="{{range \$i, \$e :=.items}}{{\$e.status.podIP}} {{end}}" \
   | sed "s/ $//" | tr " " "\n" | grep -E "^[0-9]" | grep --invert-match $ip
@@ -96,6 +101,7 @@ boot(){
   sleep $(($failover_timeout / 1000))
   ping-both
   master=$(active-master)
+  # if master found
   if [[ -n "$master" ]] ; then
     become-slave-of $master
     sentinel-monitor $master
@@ -106,7 +112,7 @@ boot(){
   touch booted
 }
 
-set-role-label(){
+set-role-label(){ # ips at pod level not namespace
   kubectl label --overwrite pods `hostname` role=$1
 }
 
