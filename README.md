@@ -1,3 +1,7 @@
+oc delete all,pvc,petset -l name=redis-node
+oc delete all,pvc,petset -l service=redis
+
+
 # Redis on Kubernetes as StatefulSet
 
 The following document describes the deployment of a self-bootstrapping, reliable,
