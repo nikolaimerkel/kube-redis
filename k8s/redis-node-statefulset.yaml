@@ -33,8 +33,6 @@ spec:
               mountPath: /config
           resources:
             requests:
-              cpu: 100m
-              memory: 1Gi
           livenessProbe: &healthcheck
             exec:
               command: [ "redis-cli", "ping" ]
@@ -50,8 +48,6 @@ spec:
               containerPort: 26379
           resources:
             requests:
-              cpu: 25m
-              memory: 50Mi
           livenessProbe: &healthcheck
             exec:
               command: [ "redis-cli", "-p", "26379", "ping" ]
@@ -60,7 +56,7 @@ spec:
 
         # Sidecar
         - name: redis-sidecar
-          image: 172.30.1.1:5000/merkel30/redismerkel
+          image: 172.30.1.1:5000/merkel40/redis-docker
           imagePullPolicy: Always
           env:
             - name: POD_NAMESPACE
@@ -75,8 +71,6 @@ spec:
               command: [ "cat", "booted" ]
           resources:
             requests:
-              cpu: 25m
-              memory: 50Mi
 
       volumes:
         - name: pod-info
@@ -95,4 +89,4 @@ spec:
         accessModes: [ "ReadWriteOnce" ]
         resources:
           requests:
-            storage: 3Gi
+            storage: 1Gi
