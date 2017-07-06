@@ -5,17 +5,17 @@ USER root
 ADD https://storage.googleapis.com/kubernetes-release/release/v1.6.0/bin/linux/amd64/kubectl /usr/local/bin/kubectl
 
 RUN ls -l /usr/local/bin/
-RUN chgrp -R redis /usr/local/bin/kubectl
-RUN chown -R redis /usr/local/bin/kubectl
+RUN chgrp -R 42 /usr/local/bin/kubectl
+RUN chown -R 42 /usr/local/bin/kubectl
 RUN chmod -R g+rwX /usr/local/bin/kubectl
 
 WORKDIR /app
 ADD . /app
 
-RUN chgrp -R redis /app
-RUN chown -R redis /app
+RUN chgrp -R 42 /app
+RUN chown -R 42 /app
 RUN chmod -R g+rwX /app/sidecar.sh
 
-USER redis
+USER 42
 
 CMD /app/sidecar.sh
