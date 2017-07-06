@@ -16,6 +16,9 @@ RUN chgrp -R 42 /app
 RUN chown -R 42 /app
 RUN chmod -R g+rwX /app/sidecar.sh
 
+RUN chgrp -R 42 /data
+RUN chown -R 42 /data
+
 USER 42
 
 CMD /app/sidecar.sh
